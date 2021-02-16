@@ -1,0 +1,107 @@
+=================
+AWS Linux ec2
+=================
+sudo su
+hostname ansible-master-node
+vi /etc/hostname  ( add ansible-master-node) to make hostname permanent.
+exit from root and again become root: now we'l see hostname at the prompt.
+
+useradd anadmin
+passwrd anadmin
+-- Give password ansible123
+-----------------
+visudo
+## Allow root to run any commands anywhere
+root    ALL=(ALL)       ALL
+anadmin ALL=(ALL)       NOPASSWD: ALL
+--------------------------------------------
+become root again: exit
+vi /etc/ssh/sshd_config
+here uncomment passowrd Authenticatio yes, and comment pwd authentication No
+service sshd restart/reload
+---------------
+now sudo su - anadmin
+ssh-keygen 
+/home/anadmin/.ssh/id_rsa.
+------------------
+Now Ansible installtion
+
+yum install python
+yum install python-pip
+pip install ansible
+ansible --version
+
+mkdir /etc/ansible
+vi ansible.cfg ( copy conf file from ansible doc)
+touch hosts
+---------------------------
+Amazon Linux ( managed Node)
+-----------------------------
+Now we will setup managed nodes
+sudo su
+steps:  ec2
+		setup hostname	
+		create anadmin user ( useradd -m -d /home/anadmin anadmin)
+		visudo
+	
+vi /etc/ssh/sshd_config
+service sshd restart
+
+
+-------------
+Add managed node under master node's host file.
+Add managed node's private IP to host file. ( ip addr) 
+on master node: sudo su - anadmin   ( become ansible user)
+ssh-copy-id prvate_ip_of_managed_node
+
+now try ssh managed_nodeIP
+--------------------
+ADD ubuntu as managed node.( user name is ubuntu)
+sudo su
+vi /etc/hostname ( change the hostname)
+hostname (give same name)
+useradd -m -d /home/anadmin anadmin ( in ubuntu user home dir is not created with useradd)
+passwd anadmin ( give same pwd)
+visudo ( same entry anadmin ALL=(ALL) NOPASSWD: ALL
+vi /etc/ssh/sshd_config :
+	make PasswordAuthentication yes
+service sshd restart
+
+Now from master node do same ssh-copy-id private_IP_ubuntu
+
+-----------------------------------
+Adhoc commands
+ping
+command
+stat
+yum
+user
+setup
+
+eg: ansible all -m ping
+	ansible all -m command -a "uptime"
+	ansible all -m command -a "hostname"
+	ansible all -m stat -a "path=/etc/hosts"
+	ansible all -m yum -a "name=git" -b
+	ansible all -m user -a "name=test_user" -b 
+	ansible all -m setup  ( it will give all system info of managed hosts)
+	ansible all -m setup -a "filter=ansible_os*"
+	ansible --list-hosts all   ( to get the list of all hosts in inventory file)
+	
+Create a blank file on the host (“abc”) with a given path using ansible
+ansible “abc” -m file -a 'path=/var/tmp/ansible_test.txt state=touch'
+------------------------------------------------------------------------------------------------------
+Remove the newly created file and verify by directly logging in to the host.
+ansible “abc”. -m file -a 'path=/var/tmp/ansible_test.txt state=absent'
+------------------------------------------------------------------------------------------------------
+Create a new directory on the host and verify:
+ansible all -m file -a 'path=/var/tmp/archive state=directory'
+-------------------------------------------------------------------------------------------------------
+Copy the Ansible server’s /etc/hosts file to remote host all. 
+ansible all -m copy -a 'src=/etc/hosts dest=/etc/hosts' -b
+----------------------------------------------------------------------------------------------------
+now lets create a script on ansible master and sopy that to all remote servers.
+
+ansible all -m copy -a 'src=/home/anadmin/script.sh dest=/var/tmp/script.sh mode=0666'
+lets chnage the permission of file to make it executable.:
+ansible all -m file -a 'path=/var/tmp/script.sh mode=0555'
