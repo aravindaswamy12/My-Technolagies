@@ -1,0 +1,47 @@
+=====================
+     *  Git  *
+=====================
+
+> git --version (to check git version).
+> git mkdir "name"(to create directory).
+
+> git init (initilige git in that folder to track this folder).
+  > .git hiden folder was creater (ls -la).
+  
+> git config --global user.name "aravind" (user name to identify who commit changes)
+> git config --global user.email "aravindaswamy12@gmail.com" (user email)
+> git config --list (to see user info)
+> git config --list | grep user (to grep only user details)
+
+> vi "filename with extension " (to create file)
+> echo "code line" > "filename" (te send code without open file)
+> git status (to track status of file)
+> git clean -f -d (to clean files or directories from staging area)
+> git add "file name" (to add specific file)
+> git add . (to add all files in directory)
+> git commit -m "message" (message for commit)
+> git pull (to pull changes from centrol repo into my local repo)
+> git push (to push changes made in local repo to central repo)
+> git branch (to see current branch)
+> ls -la (to see all and hiden files )
+> ls -l (to see all files)
+> cat "filename" (to read file)
+> git rm "filename" (to delete file)
+
+-------
+branchs
+-------
+> git branch "branch name" (to create new branch)
+> git checkout "branch name" (to switch branch)
+> git banch -d "branch name" (to delete branch)
+> git merg "branch name of which brach want to merg"
+
+
+> git log (to track commit user)
+> git log --oneline(show in single line)
+> git log --oneline | head -n 2 (first 2 log)
+> git log --oneline | tail -n 2 (last 2 log)
+
+> git clone "link of central repo"
+
+
