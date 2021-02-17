@@ -1,0 +1,155 @@
+===========
+*** GIT ***
+===========
+git init
+git config --global user.name "vikas singh"
+git config --global user.email vikas@gmail.com
+git config --list
+git config --global core.editor "/usr/bin/vim" (optional)
+
+cat ~/.gitconfig
+cd mytest-app
+
+we can make config chnages in this dir.
+verify config:  git config user.email
+Lets Create README.MD file
+vi myfile.txt
+git add . ( file added to staging area)
+NOTE: git doesn't care about empty dir
+mkdir src
+git add myfile.txt
+git status
+git rm myfile.txt ( file will not be deleted after you add to staging)
+git rm -f myfile
+
+git status -s  ( A means file is indexed,M: Modified D: deleted , ?? not tracked)
+git status -v ( more verbose details )
+
+**********************
+commit
+**********************
+git commit  ( we need to add a message abt commit)
+git commit -m
+(All commit msg goes to .git/COMMIT_EDITMSG)
+git log  ( this will give comiit's sha1 hash value, git will create a directory using first 2 digits under /.git/objects/fe/)  these are binary files we can not read them.
+
+lets say we want to remove a file from index, however not from working directory:
+	git rm --cached myfile
+	git status -s
+	git commit
+we can again add if needed.
+
+git log --oneline
+***********
+git-clean - Remove untracked files from the working tree
+git clean -f -d or git clean -fd.
+====================================
+Ignore files
+-----------------------------------
+mkdir build ( we want to ignore this dir to be tracked by git)
+
+touch .gitignore
+git add .gitignore ( git should know we have this file)
+git commit -m "Added ingnore file"
+   anything in build dir should not be tracked.
+echo "build/*" >> .gitignore
+git status
+git add , git commit
+
+Now add anythng in build directory that will not tracked.
+( we can ignore any patrern using file globing and .xml, .pdf etc)
+-----------------
+Day-2
+*******************
+git-clean (Remove untracked files from the working tree)
+git clean -f -d or git clean -fd.
+git ls-files -s ( files in staging area)
+git ls-files
+git rm --cached file ( remove from staging: before commit after add)
+* git cat-file -p 4etr67
+
+******************************
+
+Branches
+--------------------------------
+git branch ( you are on master){ it lists all local branches}
+git branch developement {create new branch}
+- git status
+$ git checkout developement ( checkout/moved to dev branch)
+make some changes here, to the code. changes will reflect only in this branch unless we merge it.
+git branch -d <branch> { delete branch}
+--> git checkout master ( you will not see changes here) 
+--------------------
+merge conflict
+-------------------------
+create 2 branches:
+add same file and make few changes to both branches.( lets make a file info.txt on both)
+git checkout trail1
+git merge trail2  
+
+git status
+vim info.txt
+correct the change
+git add
+git commit
+now lets move to master $ git checkout master
+git merge trail1
+cat info.txt
+
+we can not remove branches after merging to master
+$ git log --all --decorate --oneline --graph
+
+-----------------
+Day 3
+-------------------
+Conflict in vscode.
+
+create an account in github.
+--> create repo/or clone existing repo:
+		git clone https://rpo url
+steps to add ssh keys:
+	1) ssh -keygen -t rsa -b 4096 -C email  ( generate ssh keys)
+	2) eval `ssh-agent -s`  ( start ssh agent)
+	3) ssh-add ~/.ssh/id_ed25519  ( add ssh private keys to ssh-agent)
+
+	now check remote repo:
+	
+	git remote -v  
+	if its https, Switching remote URLs from HTTPS to SSH
+$	git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
+
+copy the pub ky to github
+clip > ~/.ssh/id_rsa.pub
+--------------
+Create an organization:
+add contributors to the repo
+
+
+
+
+
+
+Tags
+******************************
+git tag -a v0.1 -m "First tag" ( create an annotated tag)
+git tag ( view all tags for repo)
+
+git tag -d v0.1 ( delete a specific tag)
+
+--------------------------------
+----merge-------
+cat .git/HEAD
+git log --oneline
+
+before merging move to the branch where we want to merge like do $ git checkout master
+then git merge deveopment
+git branch -d develomemt ( to delete the branch)
+
+------------------------------
+vscode-git setup:
+1) install gitbash
+2) instal vscode
+3) create github account( optional)
+4) check vscode settings: file-->preferences-->settings( check git enabled)
+-------------------------------------------------------
+
