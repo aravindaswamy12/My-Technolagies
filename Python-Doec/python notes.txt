@@ -1,0 +1,36 @@
+==========================
+Python
+==========================
+day 1: Python installation.
+
+> go to www.python.org
+
+>downloads> all relesess > compatabbull version (3.6.7) > under files ... clik on Windows x86-64 executable installer (it wii downloaded).
+
+>open downloaded file and check PATH box 
+ 
+>now clik on install now(don't go for coustmied installation), install now is recommanded.
+
+>set up in progress and sucsessfull.
+
+>check python install search in search bar app can vissable.
+
+> click on python this app.
+-------------------------------
+
+----------------------
+Identifers and literal
+-----------------------
+>two types of modes
+ > intractive prompt mode (for single line executionbetter for begginers).
+ >script mode.
+   
+> Identifers  : it is used to identify objects. (like student name,age,roll no...this are identifiers).
+> Literal : valu of identifier.
+
+> VARIABLE : Variable is a combination of Identifer and Litera.
+  
+  >Rules of variable
+  1. Shouldn't use reserved keywords for identify.
+  2. Always should start with alphabet or underscore, Shouldn't start Digits and special charecters
+  3. Shouldn't use any special charecters or spaces.
