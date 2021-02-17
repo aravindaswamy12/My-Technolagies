@@ -1,0 +1,71 @@
+Create github account
+---------------------
+go to ==> github.com ==> and signup
+
+
+Configuration
+-------------
+> git config --global user.name "username"
+> git config --global user.email "email-id signedup"
+
+
+SSH Authentication
+-------------------
+> ssh-keygen
+> eval `ssh-agent -s`
+> ssh-add ~/.ssh/id_rsa(private key)
+> cd .ssh/ (changing directory path to .ssh directory)
+> cat id_rsa.pub (open rsa public key file and copy the rsa key)
+> go to ==> github.com ==> account settings => ssh and gpg keys ==> new ssh key ==> give title and paste the key
+
+Now, authentication between git bash and github is dione.
+
+
+Initializing git repo
+---------------------
+> git init
+
+
+create repo in github
+---------------------
+> go to github ==> new repositary ==> enter name, description, public, readme ==> create repository
+ 
+
+cloning git repo
+----------------
+> git clone "repo ssh url"
+
+
+Creating gitignore file
+-----------------------
+> touch .gitignore
+
+
+Frequestly used git commands
+-----------------------------
+> git status
+> git add "file name" / .(current working directory)
+> git commit -m "commit message"
+> git push
+> git pull
+
+git conflicts commands
+----------------------
+> git diff
+
+
+Braching commands
+------------------
+> git branch "branch name"
+> git checkout "branch name"
+> git branch
+> git push --set-upstream origin "branch name"
+> git branch -d "branch name"                     ===> to delete local branch
+> git push origin --delete "remote branch name"   ===> to delete remote branch name
+> git merge "branch name i.e, which branch to merge"
+
+Note: Branch-A, Branch-B. to merge branch-B to Branch-A, first we need to checkout/change to brach-A, then execute merge command.
+
+Ex:
+> git checkout Branch-A
+> git merge Branch-B
